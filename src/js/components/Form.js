@@ -12,6 +12,7 @@ class Form extends Component {
       results: "",
       value: "",
       message: "hell, low whirled",
+      sample: ["one", "two", "three", "four"],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -60,15 +61,12 @@ class Form extends Component {
             onChange={this.handleChange}
           />
         </form>
-        Value from state object: <p>{this.state.value}</p>
-        Ability name: <p>{this.state.results}</p>
-        {/* <ul>
-          {results.map((item, i) => (
-            <li key={i}>
-              <a href={item.data.url}> {item.data.title} </a>
-            </li>
+        Hello there: <p>{this.state.sample[0]}</p>
+        <ul>
+          {this.state.sample.map((int, i) => (
+            <li key={i}>{int}</li>
           ))}
-        </ul> */}
+        </ul>
         <button onClick={this.goGetPokemon}>pokemon</button>
       </div>
     );
