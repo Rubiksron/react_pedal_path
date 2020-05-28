@@ -1,76 +1,14 @@
 "use strict";
 
 import React from "react";
-import ReactDom from "react-dom";
 import superagent from "superagent";
+import SearchForm from "./SearchForm";
+import SearchResultsList from "./SearchResultsList";
 
 const API_URL = "https://pokeapi.co/api/v2/pokemon";
 
 //App - - manage applicataion state
-//SearchForm - - collect user input and call a handleSearch function
-//Searc hResults List - - display reddit pokemonInfo
-
-//::::::::::::::::::::SearchForm::::::::::::::::::::::::::::
-class SearchForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pokemonSearched: "",
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleChange(e) {
-    this.setState({
-      pokemonSearched: e.target.value,
-    });
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    this.props.handleSearch(this.state.pokemonSearched);
-  }
-  render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <label> {this.props.title} </label>
-        <input
-          type="text"
-          onChange={this.handleChange}
-          value={this.state.pokemonSearched}
-        />
-        <button type="submit"> search </button>
-      </form>
-    );
-  }
-}
-
-//::::::::::::::::::::SearchResultsList::::::::::::::::::::
-//should receive reddit article and array of reddit pokemonInfo through props
-class SearchResultsList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    let results = this.props.pokemonInfo || [];
-    console.log("results: ", results);
-    return (
-      <ul>
-        {results.map((item, i) => (
-          <a key={i} href={item.move.url}>
-            <li key={i}> {item.move.name} </li>
-          </a>
-        ))}
-      </ul>
-    );
-  }
-}
-
-//::::::::::::::APP::::::::::::::::::::::::::::::::::::::
-class App extends React.Component {
+class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -101,6 +39,7 @@ class App extends React.Component {
           results: null,
           searchErrorMessage: `Unable to find the pokemon ${pokemon}.`,
         });
+        alert(this.state.searchErrorMessage);
       });
   }
 
@@ -115,4 +54,4 @@ class App extends React.Component {
   }
 }
 
-ReactDom.render(<App />, document.getElementById("container"));
+export default Form;
