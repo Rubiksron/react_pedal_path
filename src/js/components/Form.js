@@ -55,12 +55,14 @@ class SearchResultsList extends React.Component {
   }
 
   render() {
-    let pokemonInfo = this.props.pokemonInfo || [];
-    console.log("pokemonInfo: ", pokemonInfo);
+    let results = this.props.pokemonInfo || [];
+    console.log("results: ", results);
     return (
       <ul>
-        {pokemonInfo.map((item, i) => (
-          <li key={i}>{item.move.name}</li>
+        {results.map((item, i) => (
+          <a key={i} href={item.move.url}>
+            <li key={i}> {item.move.name} </li>
+          </a>
         ))}
       </ul>
     );
@@ -80,7 +82,7 @@ class App extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(":::::::::STATE::::::::::", this.state.results);
+    console.log("---------STATE--------- : ", this.state.results);
   }
 
   PokemonFetch(pokemon) {
@@ -106,7 +108,7 @@ class App extends React.Component {
     return (
       <main>
         <h1> {this.props.title} </h1>
-        <SearchForm title="Pokemon Search" handleSearch={this.PokemonFetch} />
+        <SearchForm title="Pokemon Moves" handleSearch={this.PokemonFetch} />
         <SearchResultsList pokemonInfo={this.state.results} />
       </main>
     );
