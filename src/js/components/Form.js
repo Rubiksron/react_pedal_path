@@ -1,79 +1,116 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
+"use strict";
+
+import React from "react";
+import ReactDom from "react-dom";
 import superagent from "superagent";
 
-const API_URL = "https://pokeapi.co/api/v2/pokemon/gengar";
+const API_URL = "https://pokeapi.co/api/v2/pokemon";
 
-class Form extends Component {
-  constructor() {
-    super();
+//App - - manage applicataion state
+//SearchForm - - collect user input and call a handleSearch function
+//Searc hResults List - - display reddit pokemonInfo
 
+//::::::::::::::::::::SearchForm::::::::::::::::::::::::::::
+class SearchForm extends React.Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      results: "",
-      value: "",
-      message: "hell, low whirled",
-      sample: ["one", "two", "three", "four"],
+      pokemonSearched: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.goGetPokemon = this.goGetPokemon.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    event.preventDefault();
-    const { value } = event.target;
-    this.setState(() => {
-      return {
-        value,
-      };
+  handleChange(e) {
+    this.setState({
+      pokemonSearched: e.target.value,
     });
   }
 
-  goGetPokemon(board) {
+  handleSubmit(e) {
+    e.preventDefault();
+    this.props.handleSearch(this.state.pokemonSearched);
+  }
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label> {this.props.title} </label>
+        <input
+          type="text"
+          onChange={this.handleChange}
+          value={this.state.pokemonSearched}
+        />
+        <button type="submit"> search </button>
+      </form>
+    );
+  }
+}
+
+//::::::::::::::::::::SearchResultsList::::::::::::::::::::
+//should receive reddit article and array of reddit pokemonInfo through props
+class SearchResultsList extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    let pokemonInfo = this.props.pokemonInfo || [];
+    console.log("pokemonInfo: ", pokemonInfo);
+    return (
+      <ul>
+        {pokemonInfo.map((item, i) => (
+          <li key={i}>{item.move.name}</li>
+        ))}
+      </ul>
+    );
+  }
+}
+
+//::::::::::::::APP::::::::::::::::::::::::::::::::::::::
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      results: null,
+      searchErrorMessage: null,
+    };
+
+    this.PokemonFetch = this.PokemonFetch.bind(this);
+  }
+
+  componentDidUpdate() {
+    console.log(":::::::::STATE::::::::::", this.state.results);
+  }
+
+  PokemonFetch(pokemon) {
     superagent
-      .get(`${API_URL}`)
+      .get(`${API_URL}/${pokemon}`)
       .then((res) => {
-        console.log("request success: ", res.body.abilities[0]);
+        console.log("request success", res);
         this.setState({
-          results: res.body.abilities[0],
+          results: res.body.moves,
           searchErrorMessage: null,
         });
-        console.log("results: ", this.state.results);
       })
       .catch((err) => {
-        console.error(err);
+        console.error("ya done goofed", err);
         this.setState({
           results: null,
-          searchErrorMessage: `Unable to find the reddit board ${board}.`,
+          searchErrorMessage: `Unable to find the pokemon ${pokemon}.`,
         });
       });
   }
 
   render() {
     return (
-      <div>
-        <form>
-          <input
-            placeholder="text goes here..."
-            autoFocus={true}
-            type="text"
-            value={this.state.value}
-            onChange={this.handleChange}
-          />
-        </form>
-        Hello there: <p>{this.state.sample[0]}</p>
-        <ul>
-          {this.state.sample.map((int, i) => (
-            <li key={i}>{int}</li>
-          ))}
-        </ul>
-        <button onClick={this.goGetPokemon}>pokemon</button>
-      </div>
+      <main>
+        <h1> {this.props.title} </h1>
+        <SearchForm title="Pokemon Search" handleSearch={this.PokemonFetch} />
+        <SearchResultsList pokemonInfo={this.state.results} />
+      </main>
     );
   }
 }
 
-export default Form;
-
-const wrapper = document.getElementById("container");
-wrapper ? ReactDOM.render(<Form />, wrapper) : false;
+ReactDom.render(<App />, document.getElementById("container"));
