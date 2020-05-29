@@ -39,6 +39,7 @@ class Form extends React.Component {
           abilities: res.body.abilities || [],
           base_experience: res.body.base_experience,
           types: res.body.types || [],
+          sprites: res.body.sprites,
         });
       })
       .catch((err) => {
