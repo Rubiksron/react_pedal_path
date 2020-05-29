@@ -32,7 +32,7 @@ class PokemonStats extends React.Component {
     console.log("pokemonInfo: ", pokemonInfo);
     return (
       <section style={myStyle}>
-        <h2> {} stats </h2>
+        <h2> {pokemonInfo.name} stats </h2>
         <hr />
         <img src={pokemonSprites.front_default} />
         <img src={pokemonSprites.back_default} />
