@@ -30,7 +30,7 @@ class SearchForm extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.handleSearch(this.state.pokemonSearched);
+    this.props.handleSearch(this.state.pokemonSearched.toLowerCase());
   }
   render() {
     return (
