@@ -14,23 +14,29 @@ class Form extends React.Component {
     this.state = {
       results: null,
       searchErrorMessage: null,
+      weight: 0,
     };
 
     this.PokemonFetch = this.PokemonFetch.bind(this);
   }
 
   componentDidUpdate() {
-    console.log("---------STATE--------- : ", this.state.results);
+    console.log("---------STATE--------- : ", this.state);
   }
 
   PokemonFetch(pokemon) {
     superagent
       .get(`${API_URL}/${pokemon}`)
       .then((res) => {
-        console.log("request success", res);
+        console.log("res success: ", res.body);
+        // const name = res.body.name;
+        // console.log("name: ", name);
         this.setState({
           results: res.body.moves,
           searchErrorMessage: null,
+          weight: res.body.weight,
+          name: res.body.name,
+          id: res.body.id,
         });
       })
       .catch((err) => {
@@ -48,7 +54,7 @@ class Form extends React.Component {
       <main>
         <h1> {this.props.title} </h1>
         <SearchForm title="Pokemon Moves" handleSearch={this.PokemonFetch} />
-        <SearchResultsList pokemonInfo={this.state.results} />
+        <SearchResultsList pokemonInfo={this.state} />
       </main>
     );
   }

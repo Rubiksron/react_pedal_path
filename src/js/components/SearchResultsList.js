@@ -1,5 +1,5 @@
 "use strict";
-
+import PokemonStats from "./PokemonStats";
 import React from "react";
 
 const myStyle = {
@@ -12,6 +12,7 @@ const myStyle = {
   margin: "10px",
   listStyleType: "none",
 };
+
 //Search Results List - - display pokemonInfo
 class SearchResultsList extends React.Component {
   constructor(props) {
@@ -19,15 +20,18 @@ class SearchResultsList extends React.Component {
   }
 
   render() {
-    let results = this.props.pokemonInfo || [];
-    console.log("SRL-results: ", results);
+    let results = this.props.pokemonInfo.results || [];
+    console.log("Search Result List - results: ", results);
     return (
       <ul>
+        <section>
+          <PokemonStats pokemonInfo={this.props.pokemonInfo} />
+        </section>
+
         {results.map((item, i) => (
           <a key={i} href={item.move.url}>
             <li key={i} style={myStyle}>
-              {" "}
-              {item.move.name}{" "}
+              {item.move.name}
             </li>
           </a>
         ))}
