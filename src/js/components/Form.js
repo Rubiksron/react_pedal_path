@@ -15,6 +15,7 @@ class Form extends React.Component {
       results: null,
       searchErrorMessage: null,
       weight: 0,
+      id: 0,
     };
 
     this.PokemonFetch = this.PokemonFetch.bind(this);
@@ -28,15 +29,16 @@ class Form extends React.Component {
     superagent
       .get(`${API_URL}/${pokemon}`)
       .then((res) => {
-        console.log("res success: ", res.body);
-        // const name = res.body.name;
-        // console.log("name: ", name);
+        console.log("res.body - success: ", res.body);
         this.setState({
           results: res.body.moves,
           searchErrorMessage: null,
           weight: res.body.weight,
           name: res.body.name,
           id: res.body.id,
+          abilities: res.body.abilities || [],
+          base_experience: res.body.base_experience,
+          types: res.body.types || [],
         });
       })
       .catch((err) => {
@@ -53,7 +55,7 @@ class Form extends React.Component {
     return (
       <main>
         <h1> {this.props.title} </h1>
-        <SearchForm title="Pokemon Moves" handleSearch={this.PokemonFetch} />
+        <SearchForm title="Search: " handleSearch={this.PokemonFetch} />
         <SearchResultsList pokemonInfo={this.state} />
       </main>
     );

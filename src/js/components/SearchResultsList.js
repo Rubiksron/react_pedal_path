@@ -12,7 +12,10 @@ const myStyle = {
   margin: "10px",
   listStyleType: "none",
 };
-
+const olStyle = {
+  margin: "0px",
+  padding: "0px",
+};
 //Search Results List - - display pokemonInfo
 class SearchResultsList extends React.Component {
   constructor(props) {
@@ -23,19 +26,21 @@ class SearchResultsList extends React.Component {
     let results = this.props.pokemonInfo.results || [];
     console.log("Search Result List - results: ", results);
     return (
-      <ul>
+      <div>
         <section>
           <PokemonStats pokemonInfo={this.props.pokemonInfo} />
         </section>
 
-        {results.map((item, i) => (
-          <a key={i} href={item.move.url}>
-            <li key={i} style={myStyle}>
-              {item.move.name}
-            </li>
-          </a>
-        ))}
-      </ul>
+        <ol style={olStyle}>
+          {results.map((item, i) => (
+            <a key={i} href={item.move.url}>
+              <li key={i} style={myStyle}>
+                {item.move.name}
+              </li>
+            </a>
+          ))}
+        </ol>
+      </div>
     );
   }
 }
