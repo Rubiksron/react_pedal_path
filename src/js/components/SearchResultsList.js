@@ -7,7 +7,7 @@ const myStyle = {
   backgroundColor: "lightGrey",
   color: "DodgerBlue",
   padding: "10px",
-  fontFamily: "Arial",
+  fontFamily: "Avantgarde",
   textAlign: "center",
   margin: "10px",
   listStyleType: "none",
