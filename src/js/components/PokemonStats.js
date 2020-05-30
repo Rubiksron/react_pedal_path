@@ -63,7 +63,8 @@ class PokemonStats extends React.Component {
         <img src={pokemonSprites.front_shiny} />
         <img src={pokemonSprites.back_default} />
         <img src={pokemonSprites.front_default} />
-        <h3>{pokemonInfo.name}s moves:</h3>
+        <hr />
+        <h3>{pokemonInfo.name} moves:</h3>
       </section>
     );
   }
