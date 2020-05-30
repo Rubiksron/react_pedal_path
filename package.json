@@ -11,6 +11,9 @@
   "engines": {
     "node": "12.16.3"
   },
+  "node": {
+    "fs": "empty"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rubiksron/react_pedal_path.git"
