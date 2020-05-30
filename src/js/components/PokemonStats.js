@@ -13,7 +13,6 @@ const myStyle = {
   margin: "auto",
   paddingTop: ".25rem",
   paddingBottom: ".25rem",
-  // textAlign: "center",
 };
 const ulStyle = {
   listStyleType: "none",
@@ -32,7 +31,7 @@ class PokemonStats extends React.Component {
     console.log("pokemonInfo: ", pokemonInfo);
     return (
       <section style={myStyle}>
-        <h2> {pokemonInfo.name} stats </h2>
+        <h2> {pokemonInfo.name} stats: </h2>
         <hr />
         <img src={pokemonSprites.front_default} />
         <img src={pokemonSprites.back_default} />
@@ -41,7 +40,6 @@ class PokemonStats extends React.Component {
         <h3>Weight: {pokemonInfo.weight} </h3>
         <h3>Base Experience: {pokemonInfo.base_experience} </h3>
         <h3>ID: {pokemonInfo.id} </h3>
-
         <h3>
           Abilities:
           {
@@ -56,8 +54,8 @@ class PokemonStats extends React.Component {
           Type(s):
           {
             <ol style={ulStyle}>
-              {pokemonTypes.map((type, i) => (
-                <li key={i}>{type.type.name} </li>
+              {pokemonTypes.map((item, i) => (
+                <li key={i}>{item.type.name} </li>
               ))}
             </ol>
           }
@@ -65,6 +63,7 @@ class PokemonStats extends React.Component {
         <img src={pokemonSprites.front_shiny} />
         <img src={pokemonSprites.back_default} />
         <img src={pokemonSprites.front_default} />
+        <h3>{pokemonInfo.name}s moves:</h3>
       </section>
     );
   }

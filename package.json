@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open --mode development",
+    "start": "nodemon src/index.js",
     "build": "webpack"
+  },
+  "engines": {
+    "node": "12.16.3"
   },
   "repository": {
     "type": "git",
