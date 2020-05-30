@@ -37,6 +37,7 @@ class SearchForm extends React.Component {
       <form onSubmit={this.handleSubmit} style={myStyle}>
         <label> {this.props.title} </label>
         <input
+          placeholder="pokemon here.."
           type="text"
           onChange={this.handleChange}
           value={this.state.pokemonSearched}
