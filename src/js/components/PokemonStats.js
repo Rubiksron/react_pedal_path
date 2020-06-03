@@ -28,7 +28,7 @@ class PokemonStats extends React.Component {
     const pokemonAbilities = this.props.pokemonInfo.abilities || [];
     const pokemonTypes = this.props.pokemonInfo.types || [];
     const pokemonSprites = this.props.pokemonInfo.sprites || [];
-    console.log("pokemonInfo: ", pokemonInfo);
+    // console.log("pokemonInfo: ", pokemonInfo);
     return (
       <section style={myStyle}>
         <h2> {pokemonInfo.name} stats: </h2>
