@@ -24,7 +24,7 @@ class SearchResultsList extends React.Component {
 
   render() {
     let results = this.props.pokemonInfo.results || [];
-    console.log("Search Result List - results: ", results);
+    // console.log("Search Result List - results: ", results);
     return (
       <div>
         <section>

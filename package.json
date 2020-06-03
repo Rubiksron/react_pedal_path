@@ -1,12 +1,13 @@
 {
-  "name": "react_pedal_path",
+  "name": "pokemon_search",
   "version": "1.0.0",
-  "description": "bike paths",
+  "description": "pokemon search",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js",
-    "build": "webpack"
+    "test": "test",
+    "start": "node server.js",
+    "build": "webpack",
+    "heroku-postbuild": "webpack"
   },
   "engines": {
     "node": "12.16.3"
@@ -39,7 +40,10 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "pg": "^8.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "superagent": "^5.2.2"
