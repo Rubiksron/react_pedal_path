@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "start": "node index.js",
+    "start": "node server.js",
     "build": "webpack",
     "heroku-postbuild": "webpack"
   },
@@ -14,7 +14,7 @@
   },
   "node": {
     "fs": "empty"
-  },
+  },and
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Rubiksron/react_pedal_path.git"
