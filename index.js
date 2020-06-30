@@ -3,7 +3,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const cors = require("cors");
 const pg = require("pg");
 const client = new pg.Client(process.env.DATABASE_URL);
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(`${__dirname}/dist`));
 
-app.get("*", (req, res) => res.sendFile(`${__dirname}/dist/index.html`));
+app.get("*", (req, res) => res.sendFile(`${__dirname}/src/index.html`));
 
 client.connect().then(() => {
   app.listen(PORT, () => console.log(`Listening on port: ${PORT}`));
