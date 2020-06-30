@@ -28,12 +28,7 @@ class SearchResultsList extends React.Component {
   }
 
   componentDidMount() {
-    superagent
-      .get("https://jsonplaceholder.typicode.com/posts")
-      .then((posts) => {
-        console.log(posts.body);
-        this.setState({ posts: posts.body });
-      });
+    console.log('component mounted!!')
   }
 
   componentDidUpdate() {
